@@ -1,0 +1,63 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+
+    tools:context=".TimerActivity">
+
+    <View android:id="@+id/backgroundCircle"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_width= "300dp"
+        android:layout_height="300dp"
+        android:background="@drawable/circle" />
+
+
+    <Button
+        android:id="@+id/btnStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="67dp"
+        android:text="Start"
+        style="?android:attr/borderlessButtonStyle" />
+
+    <Button
+        android:id="@+id/btnStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="67dp"
+        android:text="Stop"
+        style="?android:attr/borderlessButtonStyle"/>
+
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Done Studying!"
+        android:layout_below="@+id/textDialog"
+        android:layout_centerHorizontal="true"
+        style="?android:attr/borderlessButtonStyle"/>
+
+    <TextView
+        android:id="@+id/textViewTimer"
+        android:layout_above="@+id/btnStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="17dp"
+        android:textSize="24sp"/>
+
+    <TextView
+        android:id="@+id/textDialog"
+        android:layout_below="@+id/btnStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:textSize="18sp"/>
+
+</RelativeLayout>

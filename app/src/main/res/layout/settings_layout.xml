@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+
+
+    <TextView
+        android:id="@+id/TimerSettings"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_height="wrap_content"
+        android:text="Timer Settings"
+        android:layout_marginTop="20dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+    <View
+        android:id="@+id/TimerDivider"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/TimerSettings"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+
+    <RelativeLayout
+        android:id="@+id/studyTimeSetting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/TimerDivider"
+        android:clickable="true">
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/StudyTime"
+            android:textSize="18sp"
+            android:text="@string/studyTimeDuration"/>
+        <TextView
+            android:layout_below="@+id/StudyTime"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/StudyTimeValue"
+            android:text="25"
+            />
+        <View
+            android:id="@+id/studyTimeDivider"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/StudyTimeValue"
+            android:layout_width="match_parent"
+            android:layout_weight= ".90"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/shortBreakSetting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/studyTimeSetting"
+        android:clickable="true">
+
+        <TextView
+            android:id="@+id/shortBreak"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:textSize="18sp"
+            android:text="@string/shortBreakDuration"/>
+        <TextView
+            android:id="@+id/shortBreakValue"
+            android:layout_marginTop="2dp"
+            android:layout_below="@+id/shortBreak"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_height="wrap_content"
+            android:text="25"
+            />
+        <View
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/shortBreakValue"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/longBreakSetting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/shortBreakSetting"
+        android:clickable="true">
+
+        <TextView
+            android:id="@+id/longBreak"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:textSize="18sp"
+            android:text="@string/longBreakDuration"/>
+        <TextView
+            android:id="@+id/longBreakValue"
+            android:layout_marginTop="2dp"
+            android:layout_below="@+id/longBreak"
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="25"
+            />
+        <View
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/longBreakValue"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/NotificationSettings"
+        android:layout_below="@+id/longBreakSetting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:text="Notification Settings"
+        android:layout_marginTop="30dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+    <View
+        android:id="@+id/NotificationDivider"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/NotificationSettings"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <RelativeLayout
+        android:id="@+id/ReceiveTimeSetting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/NotificationDivider"
+        android:clickable="true">
+
+        <TextView
+            android:id="@+id/NotificationTime"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:textSize="18sp"
+            android:text="@string/notificationtime"/>
+        <TextView
+            android:id="@+id/NotificationTimeValue"
+            android:layout_marginTop="2dp"
+            android:layout_below="@+id/NotificationTime"
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="25"
+            />
+        <View
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/NotificationTimeValue"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/ReceiveTimeSetting"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        style="?android:buttonBarStyle">
+
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/saveButton"
+            style="?android:attr/borderlessButtonStyle"
+            />
+
+
+
+        <Button
+            android:id="@+id/defaultButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/defaultButton"
+            style="?android:attr/borderlessButtonStyle"
+            />
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

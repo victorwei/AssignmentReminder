@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+
+    <!-- Title -->
+
+    <TextView
+        android:id="@+id/assignment_title_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:text="@string/assignment_title"
+        android:layout_marginTop="20dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+    <EditText
+        android:id="@+id/assignment_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/assignment_title_label"
+        android:hint="@string/assignment_title_hint"/>
+
+
+
+
+    <!-- Due Date -->
+
+    <TextView
+        android:id="@+id/dueDate_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/duedate"
+        android:layout_below="@+id/assignment_title"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+    <View
+        android:id="@+id/dueDatetopDivider"
+        android:layout_below="@+id/dueDate_title"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" />
+
+    <!-- Relative Layout used as a "button" -->
+
+    <RelativeLayout
+        android:id="@+id/dueDateLayout"
+        android:layout_width="match_parent"
+        android:layout_marginTop="1dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dueDatetopDivider">
+
+
+
+        <TextView
+            android:id="@+id/chooseDateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="15dp"
+            android:text="Choose Date"/>
+
+        <TextView
+            android:id="@+id/duetext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/chooseDateText"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_alignParentLeft="true"
+            android:text="@string/duetext"/>
+
+
+        <TextView
+            android:id="@+id/duedate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/chooseDateText"
+            android:text="@string/defaultdate" />
+
+
+        <View
+            android:id="@+id/dueDateDivider"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/duedate"
+            android:layout_width="match_parent"
+            android:layout_weight= ".90"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
+
+    </RelativeLayout>
+
+
+
+    <!-- Reminder -->
+
+    <TextView
+        android:id="@+id/reminder_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:text="@string/remindertitle"
+        android:layout_below="@+id/dueDateLayout"
+        android:layout_marginTop="20dp"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <View
+        android:id="@+id/remindDatetopDivider"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/reminder_title"
+        android:background="@android:color/darker_gray" />
+
+    <RelativeLayout
+        android:id="@+id/remindDateLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/remindDatetopDivider">
+
+        <TextView
+            android:id="@+id/remindDateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="15dp"
+            android:text="Choose Reminder"/>
+
+        <TextView
+            android:id="@+id/remindText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/remindDateText"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_alignParentLeft="true"
+            android:text="@string/remindertext"/>
+
+
+        <TextView
+            android:id="@+id/remindDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/remindDateText"
+            android:text="@string/defaultdate"
+            />
+
+
+        <View
+            android:id="@+id/remindDateDivider"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/remindDate"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
+
+
+
+    </RelativeLayout>
+
+<!--
+    <TextView
+        android:id="@+id/reminder_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/reminder_title"
+        android:text="@string/remindertext"
+        android:layout_marginTop="5dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="3dp"/>
+
+
+    <TextView
+        android:id="@+id/reminder_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reminderdate"
+        android:layout_marginLeft="3dp"
+        android:layout_above="@+id/reminderbutton"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/reminderbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/reminder_text"
+        android:layout_marginTop="5dp"
+        android:text="@string/reminderbutton"/>
+
+-->
+
+
+
+    <!-- Bottom Buttons -->
+
+    <!--
+    <Button
+        android:id="@+id/cancelbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="40dp"
+        android:text="@string/cancelbutton" />
+
+    <Button
+        android:id="@+id/submitbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="40dp"
+        android:text="@string/submitbutton"/>
+
+        -->
+
+    <View
+        android:id="@+id/bottomDivider"
+        android:layout_marginTop="70dp"
+        android:layout_below="@+id/remindDateLayout"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" />
+
+
+    <LinearLayout
+        android:layout_below="@+id/remindDateLayout"
+        android:layout_marginTop="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        style="?android:buttonBarStyle">
+
+
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/submitbutton"
+            style="?android:attr/borderlessButtonStyle"
+            />
+
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/cancelbutton"
+            style="?android:attr/borderlessButtonStyle"
+            />
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+</RelativeLayout>

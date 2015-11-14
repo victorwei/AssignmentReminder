@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">Assignment Reminder</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="additembutton">Add Assignment</string>
+    <string name="timerbutton">Study Now!</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- add AssignmentActivity -->
+
+    <!-- Title -->
+    <string name="assignment_title">Assignment Title</string>
+    <string name="assignment_title_hint">Enter Assignment</string>
+
+
+    <!-- Date -->
+    <string name="duedate"> Due Date</string>
+    <string name="duetext">Due: </string>
+    <string name="defaultdate"> </string>
+    <string name="button_date">Choose Date</string>
+
+    <!-- Reminder -->
+    <string name="remindertitle">Reminder Date</string>
+    <string name="remindertext"> Remind me on:  </string>
+    <string name="reminderdate"></string>
+    <string name="reminderbutton">Choose Reminder </string>
+
+
+    <!-- Status -->
+    <string name="statustitle">Status</string>
+    <string name="status_notfinished">Not Finsihed</string>
+    <string name="status_finished">Finished</string>
+
+
+    <!-- Buttons -->
+    <string name="cancelbutton">Cancel</string>
+    <string name="submitbutton">Submit</string>
+
+
+
+    <!-- assignment_item.xml     //used in AssignmentAdapter -->
+    <string name="duedatetitle">Due:  </string>
+    <string name="finishedStatus">Finished:  </string>
+    <string name="item_button">Start Assignment</string>
+
+    <!-- settings_layout.xml -->
+    <string name ="studyTimeDuration">Study time duration</string>
+    <string name ="shortBreakDuration">Short break duration</string>
+    <string name ="longBreakDuration">Long break duration</string>
+
+    <string name ="notificationtime">Receive notifications at:</string>
+
+    <string name ="saveButton">Save</string>
+    <string name ="defaultButton">Restore\nDefault</string>
+
+
+
+
+
+</resources>
