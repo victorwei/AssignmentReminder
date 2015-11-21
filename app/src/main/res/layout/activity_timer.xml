@@ -5,6 +5,15 @@
 
     tools:context=".TimerActivity">
 
+    <TextView
+        android:id="@+id/timerCurrentStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:text="test"/>
+
     <View android:id="@+id/backgroundCircle"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
@@ -37,10 +46,10 @@
         android:id="@+id/btnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Done Studying!"
-        android:layout_below="@+id/textDialog"
-        android:layout_centerHorizontal="true"
-        style="?android:attr/borderlessButtonStyle"/>
+        android:text="Finish"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/textViewTimer"
@@ -48,6 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:text = "00:00"
         android:layout_marginBottom="17dp"
         android:textSize="24sp"/>
 
@@ -58,6 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="17dp"
+        android:text = ""
         android:textSize="18sp"/>
 
 </RelativeLayout>

@@ -17,7 +17,7 @@ import java.util.Date;
  */
 public class AlarmReceiver extends BroadcastReceiver {
 
-    private Calendar currentDate, dueDate;
+    private Calendar currentDate, dueDate, nextDate;
     private Date dueDateDate;
     private AlarmManager alarmManager;
 
@@ -31,7 +31,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         String notificationText = "Stop procrastinating and get to work!";
         String assignmentTitle = intent.getStringExtra("Title");
         String dueDateString = intent.getStringExtra("DueDate");
-        String notificationMessage = "You have an assignment due: " + dueDate +"\nBe fucking productive!";
+        String notificationMessage = "You have an assignment due: " + dueDateString +"\nBe fucking productive!";
         String tickerTitle = "Reminder for " + assignmentTitle;
         int requestCode = intent.getIntExtra("PendingIntentRequestCode",0);
 
@@ -43,18 +43,22 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
 
         currentDate = Calendar.getInstance();
+        nextDate = Calendar.getInstance();
+        nextDate.add(Calendar.DATE, 1);
         dueDate = Calendar.getInstance();
         dueDate.setTime(dueDateDate);
 
 
         //send another notification in a day if current date is before due date
+
         if (dueDate.after(currentDate)){
             alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
             Intent nextNotificationIntent = new Intent(context, AlarmReceiver.class);
-            PendingIntent notificationPendingIntent = PendingIntent.getBroadcast(context,requestCode, nextNotificationIntent, 0);
-            alarmManager.set(AlarmManager.RTC_WAKEUP, AlarmManager.INTERVAL_FIFTEEN_MINUTES, notificationPendingIntent);
+            PendingIntent notificationPendingIntent = PendingIntent.getBroadcast(context,requestCode, nextNotificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, nextDate.getTimeInMillis(), notificationPendingIntent);
             //create new notification to go off in 1 day.
         }
+
 
 
         Intent notificationIntent = new Intent (context, TimerActivity.class);

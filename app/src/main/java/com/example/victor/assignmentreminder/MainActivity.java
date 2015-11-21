@@ -66,10 +66,6 @@ public class MainActivity extends ListActivity {
     private static final int MENU_DUMP = Menu.FIRST + 1;
 
 
-    private AlarmManager alarmManager;
-    private Intent notifcationReceiverIntent;
-    private PendingIntent notificationReceiverPendingIntent;
-
     AssignmentAdapter aAdapter;
 
 
@@ -78,13 +74,13 @@ public class MainActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // set adapter
         aAdapter = new AssignmentAdapter(getApplicationContext(), this);
-
 
 
         getListView().setHeaderDividersEnabled(true);
 
-
+        //set view for header
         LinearLayout headerView = (LinearLayout)getLayoutInflater().inflate(R.layout.activity_main, getListView(), false);
 
         getListView().addHeaderView(headerView);
@@ -112,8 +108,6 @@ public class MainActivity extends ListActivity {
                 // dialog to choose due date;
                 Intent intent = new Intent(getApplicationContext(), TimerActivity.class);
                 startActivity(intent);
-
-                ;
             }
         });
 

@@ -9,6 +9,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -19,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.concurrent.TimeUnit;
 
@@ -31,18 +33,24 @@ public class TimerActivity extends Activity
 
 
     private Button btnStart, btnStop, btnFinish;
-    private Uri breakRingtone, workRingtone;
-    private TextView textViewTimer, textDialog;
+    //private Uri breakRingtonezz, workRingtonezz;
+    private TextView textViewTimer, textViewTimerType;
+    private String studyTimeText, shortBreakText, longBreakText;
+
     private static Integer studytime = 10000;        // 3 minutes
     private static Integer breaktime = 5000;
     private static Integer longbreaktime = 15000;
     private static Integer ticktime = 1000;         // 1 second interval
-    Integer counter = 1;
+    private int counter = 1;
     private CounterClass WorkTimer, ShortBreakTimer, LongBreakTimer;
+    private static MediaPlayer breakRingtone, workRingtone;
 
     private static void getSettingValues (Context context){
 
         globalVariables = context.getSharedPreferences(sharedPreferenceString, MODE_PRIVATE);
+        studyTime = "StudyTimeVariable";
+        shortBreak = "ShortBTimeVariable";
+        longBreak = "LongBTimeVariable";
 
         int studyVar = globalVariables.getInt(studyTime, 25 );
         int sBreakVar = globalVariables.getInt(shortBreak, 5);
@@ -53,32 +61,70 @@ public class TimerActivity extends Activity
         longbreaktime = lBreakVar * 60000;
     }
 
-    public void playRingtoneAlarm(){
+    public static void playBreakRingtone(Context context){
+        /*
         breakRingtone = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         Ringtone ringtoneSound = RingtoneManager.getRingtone(getApplicationContext(), breakRingtone);
-
         if (ringtoneSound != null) {
             ringtoneSound.play();
         }
+        */
+
+        breakRingtone = MediaPlayer.create(context, R.raw.mario_break_ringtone);
+        breakRingtone.start();
+    }
+
+
+    public void playWorkRingtone(){
+        workRingtone = MediaPlayer.create(TimerActivity.this, R.raw.mario_break_ringtone);
+        workRingtone.start();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
-
-
-
 
         btnStart = (Button)findViewById(R.id.btnStart);
         btnStop = (Button)findViewById(R.id.btnStop);
         btnFinish = (Button)findViewById(R.id.btnBack);
         textViewTimer = (TextView)findViewById(R.id.textViewTimer);
-        textDialog = (TextView)findViewById(R.id.textDialog);
+        textViewTimerType = (TextView)findViewById(R.id.timerCurrentStatus);
+        //textDialog = (TextView)findViewById(R.id.textDialog);
 
         getSettingValues(getApplicationContext());
 
-        textViewTimer.setText("00:03:00");
+
+        //set string values to display initial timer text
+        String initialTimerText = "";
+        int initialHourText = studytime/60000;
+        if (initialHourText < 10){
+            initialTimerText = "0"+initialHourText;
+        } else {
+            initialTimerText = ""+initialHourText;
+        }
+        studyTimeText =initialTimerText + ":00";
+
+        initialHourText = breaktime/60000;
+        if (initialHourText < 10){
+            initialTimerText = "0"+initialHourText;
+        } else {
+            initialTimerText = ""+initialHourText;
+        }
+        shortBreakText = initialTimerText + ":00";
+
+        initialHourText = longbreaktime/60000;
+        if (initialHourText < 10){
+            initialTimerText = "0"+initialHourText;
+        } else {
+            initialTimerText = ""+initialHourText;
+        }
+        longBreakText = initialTimerText + ":00";
+
+
+        textViewTimer.setText(studyTimeText);
+        textViewTimerType.setText("Work Timer");
 
 
 
@@ -133,13 +179,13 @@ public class TimerActivity extends Activity
     public void startTimer (int counterID) {
 
         if ((counterID % 2) == 1) {
-            WorkTimer = new CounterClass(studytime, ticktime);
-
+            //WorkTimer = new CounterClass(studytime, ticktime);
+            WorkTimer = new CounterClass(8000, ticktime);
         } else if ((counterID % 8) == 0 ) {
-            LongBreakTimer = new CounterClass(longbreaktime, ticktime);        //long break time
+            LongBreakTimer = new CounterClass(5000, ticktime);        //long break time
 
         } else if ((counterID % 2) == 0 ){
-            ShortBreakTimer = new CounterClass(breaktime, ticktime);
+            ShortBreakTimer = new CounterClass(4000, ticktime);
 
         }
 
@@ -147,12 +193,17 @@ public class TimerActivity extends Activity
 
     }
 
-    public void createDialog (){
+    public void createBreakDialog (){
         FragmentManager fm = getFragmentManager();
         breakTimeDialog breakDialog = new breakTimeDialog();
         breakDialog.show(fm, "breakdialog");
+    }
 
-}
+    public void createWorkDialog (){
+        FragmentManager fm = getFragmentManager();
+        workTimeDialog workDialog = new workTimeDialog();
+        workDialog.show(fm, "workdialog");
+    }
 
 
     public class CounterClass extends CountDownTimer {
@@ -165,9 +216,16 @@ public class TimerActivity extends Activity
         public void onTick(long millisUntilFinished) {
 
             long millis = millisUntilFinished;
+            String hourminsec = String.format("%02d:%02d",
+                    TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
+                    TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+
+
+/*
             String hourminsec = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
                     TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
                     TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+*/
 
             System.out.println(hourminsec);
             textViewTimer.setText(hourminsec);
@@ -177,26 +235,29 @@ public class TimerActivity extends Activity
         @Override
         public void onFinish() {
             if (counter % 2 == 1){
-                textViewTimer.setText("BREAK TIME FOOL!");
-                playRingtoneAlarm();
-                createDialog();
-                counter += 1;
+                textViewTimer.setText(shortBreakText);
+                createBreakDialog();
+                textViewTimerType.setText("Short Break");
+
+                counter++;
                 startTimer(counter);
 
-
-
-            } else if (counter % 7 == 0) {
-                textViewTimer.setText("LONG BREAK TIME");
-                counter += 1;
+            } else if ((counter % 8) == 0) {
+                textViewTimer.setText(longBreakText);
+                createWorkDialog();
+                textViewTimerType.setText("Long Break");
+                counter ++;
                 startTimer(counter);
-            } else if (counter % 2 == 0) {
-                textViewTimer.setText("Time to get back to Studying!");
+            } else if ((counter % 2) == 0) {
+                textViewTimer.setText(studyTimeText);
+                createWorkDialog();
+                textViewTimerType.setText("Work");
                 counter += 1;
                 startTimer(counter);
             }
 
 
-            textDialog.setText("BREAK TIME FOOL");
+            //textDialog.setText("BREAK TIME FOOL");
 
         }
     }
@@ -228,11 +289,46 @@ public class TimerActivity extends Activity
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             // Use the Builder class for convenient dialog construction
+
+            breakRingtone = MediaPlayer.create(getActivity(), R.raw.mario_break_ringtone);
+            breakRingtone.start();
+
             String alertMessage = "Good work! Take a twix";
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setMessage(alertMessage)
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
+                            Toast newtoast = Toast.makeText(getActivity(), "test", Toast.LENGTH_SHORT);
+                            newtoast.show();
+                            breakRingtone.stop();
+
+
+                        }
+                    });
+
+            // Create the AlertDialog object and return it
+            return builder.create();
+        }
+    }
+
+
+    public static class workTimeDialog extends DialogFragment {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the Builder class for convenient dialog construction
+
+            workRingtone = MediaPlayer.create(getActivity(), R.raw.mario_work_ringtone);
+            workRingtone.start();
+
+            String alertMessage = "Time to get back to work!";
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage(alertMessage)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Toast newtoast = Toast.makeText(getActivity(), "test", Toast.LENGTH_SHORT);
+                            newtoast.show();
+                            workRingtone.stop();
+
 
                         }
                     });

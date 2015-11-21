@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,6 +26,13 @@ public class AssignmentRecord {
     public enum Status {
         NOTFINISHED, FINISHED
     };
+
+    //for global variables
+    private static SharedPreferences globalVariables;
+    private static String sharedPreferenceString= "Application_Variables";
+    private static String notifyHour, notifyMinute;
+    private static int remindHour, remindMinute;
+
 
     public static final String LINE_SEP = System.getProperty("line.separator");
 
@@ -57,6 +65,20 @@ public class AssignmentRecord {
 
 
     public final static SimpleDateFormat standardDateformat = new SimpleDateFormat("MM-dd-yyyy", Locale.US);
+
+    private static void getSettingValues (Context context){
+
+        globalVariables = context.getSharedPreferences(sharedPreferenceString, Context.MODE_PRIVATE);
+
+        notifyHour = "HourVariable";
+        notifyMinute = "MinuteVariable";
+
+        int hour = globalVariables.getInt(notifyHour, 10 );
+        int minute = globalVariables.getInt(notifyMinute, 0);
+
+        remindHour = hour;
+        remindMinute = minute;
+    }
 
 
 
@@ -101,15 +123,19 @@ public class AssignmentRecord {
         notificationReceiverIntent.putExtra("DueDateValue", dueDate);
         notificationReceiverIntent.putExtra("PendingIntentRequestCode", var);
 
-        long date = getRemindDayLong();
-
+        long date = getRemindDayLong(context);
 
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.clear();
+
+
+        //calendar.setTimeInMillis(System.currentTimeMillis());
+
+        //calendar.add(Calendar.DATE, 1);
+/*        calendar.clear();
         calendar.set(Calendar.MONTH, 10);
         calendar.set(Calendar.YEAR, 2015);
         calendar.set(Calendar.DAY_OF_MONTH, 15);
+*/
 
         //calendar.set(Calendar.HOUR_OF_DAY, 20);
         //calendar.set(Calendar.MINUTE, 48);
@@ -125,7 +151,7 @@ public class AssignmentRecord {
         notificationReceiverPendingIntent = PendingIntent.getBroadcast(context, var, notificationReceiverIntent, 0);
 //        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, time,AlarmManager.INTERVAL_DAY,
 //                notificationReceiverPendingIntent);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), notificationReceiverPendingIntent);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, date, notificationReceiverPendingIntent);
 //        alarmManager.setExact(AlarmManager.RTC_WAKEUP, time,
 //                AlarmManager.INTERVAL_DAY, notificationReceiverPendingIntent);
 
@@ -183,12 +209,16 @@ public class AssignmentRecord {
 
 
     //confirmed gives correct time
-    public Long getRemindDayLong() {
+    public Long getRemindDayLong(Context context) {
+
+        // get values to determine when to send notificatioon
+        getSettingValues(context);
+
         Calendar targetdate = Calendar.getInstance();
         targetdate.setTime (reminderDate);
-        int month = targetdate.get(Calendar.MONTH);
-        int day = targetdate.get(Calendar.DAY_OF_MONTH);
-        int year = targetdate.get(Calendar.YEAR);
+
+        targetdate.set(Calendar.HOUR_OF_DAY, remindHour);
+        targetdate.set(Calendar.MINUTE, remindMinute);
 
         return targetdate.getTimeInMillis();
 

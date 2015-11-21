@@ -19,8 +19,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-//import android.support.v4.app.FragmentManager;
-//import android.support.v4.app.DialogFragment;
 
 /**
  * Created by victor on 9/8/15.
@@ -68,7 +66,6 @@ public class AssignmentAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        //FragmentManager fragManager = activity
 
         //get current item
         final AssignmentRecord assignmentRecord = alist.get(position);
