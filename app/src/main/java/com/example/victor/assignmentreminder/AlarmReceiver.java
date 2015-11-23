@@ -51,6 +51,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         //send another notification in a day if current date is before due date
 
+        /*
         if (dueDate.after(currentDate)){
             alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
             Intent nextNotificationIntent = new Intent(context, AlarmReceiver.class);
@@ -58,6 +59,8 @@ public class AlarmReceiver extends BroadcastReceiver {
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, nextDate.getTimeInMillis(), notificationPendingIntent);
             //create new notification to go off in 1 day.
         }
+        */
+
 
 
 

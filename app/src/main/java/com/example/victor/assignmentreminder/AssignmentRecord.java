@@ -57,10 +57,8 @@ public class AssignmentRecord {
     private Status defaultStatus = Status.NOTFINISHED;
 
     private AlarmManager alarmManager;
-    private NotificationManager notificationManager;
-    private Notification.Builder notificationBuilder;
-    private Intent notificationReceiverIntent, notificationIntent;
-    private PendingIntent notificationReceiverPendingIntent, notificationPendingIntent;
+    private Intent notificationReceiverIntent;
+    private PendingIntent notificationReceiverPendingIntent;
     private static final int mID = 1;
 
 
@@ -128,37 +126,22 @@ public class AssignmentRecord {
         Calendar calendar = Calendar.getInstance();
 
 
-        //calendar.setTimeInMillis(System.currentTimeMillis());
-
-        //calendar.add(Calendar.DATE, 1);
-/*        calendar.clear();
-        calendar.set(Calendar.MONTH, 10);
-        calendar.set(Calendar.YEAR, 2015);
-        calendar.set(Calendar.DAY_OF_MONTH, 15);
-*/
-
-        //calendar.set(Calendar.HOUR_OF_DAY, 20);
-        //calendar.set(Calendar.MINUTE, 48);
-        //calendar.set(Calendar.SECOND, 0);
-        //calendar.set(Calendar.AM_PM,Calendar.PM);
-
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(System.currentTimeMillis());
 
         long time = calendar.getTimeInMillis();
 
 
-        notificationReceiverPendingIntent = PendingIntent.getBroadcast(context, var, notificationReceiverIntent, 0);
-//        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, time,AlarmManager.INTERVAL_DAY,
-//                notificationReceiverPendingIntent);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, date, notificationReceiverPendingIntent);
-//        alarmManager.setExact(AlarmManager.RTC_WAKEUP, time,
-//                AlarmManager.INTERVAL_DAY, notificationReceiverPendingIntent);
+        notificationReceiverPendingIntent = PendingIntent.getBroadcast(context, var, notificationReceiverIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, date ,AlarmManager.INTERVAL_DAY,
+                notificationReceiverPendingIntent);
+//        alarmManager.setExact(AlarmManager.RTC_WAKEUP, date, notificationReceiverPendingIntent);
 
     }
 
     public void cancelNotification ()
     {
+        //notificationReceiverPendingIntent.cancel();
         alarmManager.cancel(notificationReceiverPendingIntent);
     }
 
