@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ public class TimerActivity extends Activity
     //private Uri breakRingtonezz, workRingtonezz;
     private TextView textViewTimer, textViewTimerType;
     private String studyTimeText, shortBreakText, longBreakText;
+    private RelativeLayout activityBackground;
 
     private static Integer studytime = 10000;        // 3 minutes
     private static Integer breaktime = 5000;
@@ -85,6 +87,8 @@ public class TimerActivity extends Activity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
+
+        activityBackground = (RelativeLayout)findViewById(R.id.timerActivity);
 
         btnStart = (Button)findViewById(R.id.btnStart);
         btnStop = (Button)findViewById(R.id.btnStop);
@@ -238,7 +242,7 @@ public class TimerActivity extends Activity
                 textViewTimer.setText(shortBreakText);
                 createBreakDialog();
                 textViewTimerType.setText("Short Break");
-
+                activityBackground.setBackgroundResource(R.drawable.timer_break);
                 counter++;
                 startTimer(counter);
 
@@ -247,12 +251,15 @@ public class TimerActivity extends Activity
                 createWorkDialog();
                 textViewTimerType.setText("Long Break");
                 counter ++;
+                activityBackground.setBackgroundResource(R.drawable.timer_size);
                 startTimer(counter);
             } else if ((counter % 2) == 0) {
                 textViewTimer.setText(studyTimeText);
                 createWorkDialog();
                 textViewTimerType.setText("Work");
                 counter += 1;
+
+                activityBackground.setBackgroundResource(R.drawable.timer_size);
                 startTimer(counter);
             }
 
