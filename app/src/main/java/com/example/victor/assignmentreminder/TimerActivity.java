@@ -260,7 +260,7 @@ public class TimerActivity extends Activity
                 counter += 1;
 
                 activityBackground.setBackgroundResource(R.drawable.timer_size);
-                startTimer(counter);
+                startTimer(counter); 
             }
 
 
