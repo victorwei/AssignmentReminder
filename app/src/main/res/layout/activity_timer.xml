@@ -25,8 +25,32 @@
         android:background="@drawable/circle" />
 -->
 
+    <TextView
+        android:id="@+id/textViewTimer"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text = "00:00"
+        android:layout_marginTop="220dp"
+        android:textSize="36dp"/>
+
     <Button
         android:id="@+id/btnStart"
+        android:layout_below="@+id/textViewTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="55dp"
+
+        android:layout_centerVertical="true"
+
+        android:text="Start"
+        style="?android:attr/borderlessButtonStyle" />
+
+    <!--
+    <Button
+        android:id="@+id/btnStart_oldposition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -44,6 +68,7 @@
         android:layout_marginRight="67dp"
         android:text="Stop"
         style="?android:attr/borderlessButtonStyle"/>
+        -->
 
     <Button
         android:id="@+id/btnBack"
@@ -54,15 +79,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:id="@+id/textViewTimer"
-        android:layout_above="@+id/btnStop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text = "00:00"
-        android:layout_marginBottom="17dp"
-        android:textSize="24sp"/>
+
 
     <TextView
         android:id="@+id/textDialog"

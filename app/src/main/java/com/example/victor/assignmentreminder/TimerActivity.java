@@ -91,7 +91,7 @@ public class TimerActivity extends Activity
         activityBackground = (RelativeLayout)findViewById(R.id.timerActivity);
 
         btnStart = (Button)findViewById(R.id.btnStart);
-        btnStop = (Button)findViewById(R.id.btnStop);
+        //btnStop = (Button)findViewById(R.id.btnStop);
         btnFinish = (Button)findViewById(R.id.btnBack);
         textViewTimer = (TextView)findViewById(R.id.textViewTimer);
         textViewTimerType = (TextView)findViewById(R.id.timerCurrentStatus);
@@ -153,6 +153,7 @@ public class TimerActivity extends Activity
             }
         });
 
+        /*
         //Button Stop
         btnStop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,6 +167,7 @@ public class TimerActivity extends Activity
                 }
             }
         });
+        */
 
 
         btnFinish.setOnClickListener(new View.OnClickListener() {
@@ -186,7 +188,7 @@ public class TimerActivity extends Activity
             //WorkTimer = new CounterClass(studytime, ticktime);
             WorkTimer = new CounterClass(8000, ticktime);
         } else if ((counterID % 8) == 0 ) {
-            LongBreakTimer = new CounterClass(5000, ticktime);        //long break time
+            LongBreakTimer = new CounterClass(10000, ticktime);        //long break time
 
         } else if ((counterID % 2) == 0 ){
             ShortBreakTimer = new CounterClass(4000, ticktime);
@@ -236,9 +238,19 @@ public class TimerActivity extends Activity
 
         }
 
+        //  1  2  3  4  5  6  7  8
+
         @Override
         public void onFinish() {
-            if (counter % 2 == 1){
+            if ((counter % 7) ==0 ) {
+                textViewTimer.setText(longBreakText);
+                createWorkDialog();
+                textViewTimerType.setText("Long Break");
+                counter++;
+                activityBackground.setBackgroundResource(R.drawable.timer_break);
+                startTimer(counter);
+
+            } else if (counter % 2 == 1){
                 textViewTimer.setText(shortBreakText);
                 createBreakDialog();
                 textViewTimerType.setText("Short Break");
@@ -246,26 +258,14 @@ public class TimerActivity extends Activity
                 counter++;
                 startTimer(counter);
 
-            } else if ((counter % 8) == 0) {
-                textViewTimer.setText(longBreakText);
-                createWorkDialog();
-                textViewTimerType.setText("Long Break");
-                counter ++;
-                activityBackground.setBackgroundResource(R.drawable.timer_size);
-                startTimer(counter);
             } else if ((counter % 2) == 0) {
                 textViewTimer.setText(studyTimeText);
                 createWorkDialog();
-                textViewTimerType.setText("Work");
-                counter += 1;
-
+                textViewTimerType.setText("Work Timer");
+                counter ++;
                 activityBackground.setBackgroundResource(R.drawable.timer_size);
-                startTimer(counter); 
+                startTimer(counter);
             }
-
-
-            //textDialog.setText("BREAK TIME FOOL");
-
         }
     }
 

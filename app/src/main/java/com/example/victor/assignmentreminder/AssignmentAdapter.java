@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
 /**
@@ -101,8 +102,18 @@ public class AssignmentAdapter extends BaseAdapter{
                     builder.setMessage(alertMessage)
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    deleteItem(assignmentRecord);
-                                    assignmentRecord.cancelNotification();
+
+                                    Calendar currentDate = Calendar.getInstance();
+                                    Calendar dueDate = Calendar.getInstance();
+                                    dueDate.setTime(assignmentRecord.getDueDate());
+
+                                    if (currentDate.after(dueDate)){
+                                        deleteItem(assignmentRecord);
+                                    } else {
+                                        deleteItem(assignmentRecord);
+                                        //assignmentRecord.cancelNotification();
+                                    }
+
                                 }
                             })
                             .setNegativeButton("No", new DialogInterface.OnClickListener() {
