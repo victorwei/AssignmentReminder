@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,11 +34,12 @@ public class TimerActivity extends Activity
     private static String studyTime, shortBreak, longBreak;
 
 
-    private Button btnStart, btnStop, btnFinish;
-    //private Uri breakRingtonezz, workRingtonezz;
+    private Button btnStart;
+    private ImageButton btnBack;
     private TextView textViewTimer, textViewTimerType;
     private String studyTimeText, shortBreakText, longBreakText;
     private RelativeLayout activityBackground;
+    private boolean isOn = false;
 
     private static Integer studytime = 10000;        // 3 minutes
     private static Integer breaktime = 5000;
@@ -63,24 +65,6 @@ public class TimerActivity extends Activity
         longbreaktime = lBreakVar * 60000;
     }
 
-    public static void playBreakRingtone(Context context){
-        /*
-        breakRingtone = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-        Ringtone ringtoneSound = RingtoneManager.getRingtone(getApplicationContext(), breakRingtone);
-        if (ringtoneSound != null) {
-            ringtoneSound.play();
-        }
-        */
-
-        breakRingtone = MediaPlayer.create(context, R.raw.mario_break_ringtone);
-        breakRingtone.start();
-    }
-
-
-    public void playWorkRingtone(){
-        workRingtone = MediaPlayer.create(TimerActivity.this, R.raw.mario_break_ringtone);
-        workRingtone.start();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +76,7 @@ public class TimerActivity extends Activity
 
         btnStart = (Button)findViewById(R.id.btnStart);
         //btnStop = (Button)findViewById(R.id.btnStop);
-        btnFinish = (Button)findViewById(R.id.btnBack);
+        btnBack = (ImageButton)findViewById(R.id.btnBack);
         textViewTimer = (TextView)findViewById(R.id.textViewTimer);
         textViewTimerType = (TextView)findViewById(R.id.timerCurrentStatus);
         //textDialog = (TextView)findViewById(R.id.textDialog);
@@ -142,35 +126,23 @@ public class TimerActivity extends Activity
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if ((counter % 2) == 1) {
-                    WorkTimer.start();
-                } else if ((counter % 8) == 0 ) {
-                    LongBreakTimer.start();
-                } else if ((counter % 2) == 0 ){
-                    ShortBreakTimer.start();
+                if (!isOn) {
+                    if ((counter % 2) == 1) {
+                        WorkTimer.start();
+                    } else if ((counter % 8) == 0 ) {
+                        LongBreakTimer.start();
+                    } else if ((counter % 2) == 0 ){
+                        ShortBreakTimer.start();
+                    }
+
                 }
+
 
             }
         });
 
-        /*
-        //Button Stop
-        btnStop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if ((counter % 2) == 1) {
-                    WorkTimer.cancel();
-                } else if ((counter % 8) == 0 ) {
-                    LongBreakTimer.cancel();
-                } else if ((counter % 2) == 0 ){
-                    ShortBreakTimer.cancel();
-                }
-            }
-        });
-        */
 
-
-        btnFinish.setOnClickListener(new View.OnClickListener() {
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -214,6 +186,7 @@ public class TimerActivity extends Activity
 
     public class CounterClass extends CountDownTimer {
 
+
         public CounterClass(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
         }
@@ -221,6 +194,7 @@ public class TimerActivity extends Activity
         @Override
         public void onTick(long millisUntilFinished) {
 
+            isOn = true;
             long millis = millisUntilFinished;
             String hourminsec = String.format("%02d:%02d",
                     TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
@@ -238,11 +212,11 @@ public class TimerActivity extends Activity
 
         }
 
-        //  1  2  3  4  5  6  7  8
 
         @Override
         public void onFinish() {
             if ((counter % 7) ==0 ) {
+                isOn = false;
                 textViewTimer.setText(longBreakText);
                 createWorkDialog();
                 textViewTimerType.setText("Long Break");
@@ -251,6 +225,7 @@ public class TimerActivity extends Activity
                 startTimer(counter);
 
             } else if (counter % 2 == 1){
+                isOn = false;
                 textViewTimer.setText(shortBreakText);
                 createBreakDialog();
                 textViewTimerType.setText("Short Break");
@@ -259,11 +234,12 @@ public class TimerActivity extends Activity
                 startTimer(counter);
 
             } else if ((counter % 2) == 0) {
+                isOn = false;
                 textViewTimer.setText(studyTimeText);
                 createWorkDialog();
                 textViewTimerType.setText("Work Timer");
                 counter ++;
-                activityBackground.setBackgroundResource(R.drawable.timer_size);
+                activityBackground.setBackgroundResource(R.drawable.timer_go);
                 startTimer(counter);
             }
         }

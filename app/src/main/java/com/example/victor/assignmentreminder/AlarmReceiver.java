@@ -76,7 +76,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setContentText(notificationMessage)
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(notificationMessage))
-                .setSmallIcon(R.drawable.notification_template_icon_bg);
+                .setSmallIcon(R.drawable.app_logo);
 
         notificationBuilder.setContentIntent(notificationPendingIntent);
 

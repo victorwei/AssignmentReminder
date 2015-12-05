@@ -32,6 +32,7 @@ public class SettingsActivity extends Activity {
     private static String studyTime, shortBreak, longBreak, notifyHour, notifyMinute;
     private static int studyVal, sBreakVal, lBreakVal, hourVal, minuteVal;
 
+
     private final int highlightColor = 0x9900CCFF;
     private final int backgroundCOlor = 0x000000;
 
@@ -260,6 +261,8 @@ public class SettingsActivity extends Activity {
     public static class studyPickerDialog extends DialogFragment
             implements NumberPicker.OnValueChangeListener {
 
+        private int tempValue;
+
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState){
@@ -278,6 +281,12 @@ public class SettingsActivity extends Activity {
                     .setPositiveButton("Set", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            setTimerValues(tempValue, 1);
+                            //save to global variables
+                            globalVariables = getActivity().getSharedPreferences(sharedPreferenceString, MODE_PRIVATE);
+                            SharedPreferences.Editor editor = globalVariables.edit();
+                            editor.putInt(studyTime, tempValue);
+                            editor.commit();
                             //
                         }
                     })
@@ -301,18 +310,23 @@ public class SettingsActivity extends Activity {
 
         @Override
         public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+            tempValue = newVal;
+            /*
             setTimerValues(newVal, 1);
             //save to global variables
             globalVariables = getActivity().getSharedPreferences(sharedPreferenceString, MODE_PRIVATE);
             SharedPreferences.Editor editor = globalVariables.edit();
             editor.putInt(studyTime, newVal);
             editor.commit();
+            */
         }
     }
 
     //dialog used for choosing short break duration
     public static class sBreakPickerDialog extends DialogFragment
             implements NumberPicker.OnValueChangeListener {
+
+        private int tempValue;
 
 
         @Override
@@ -332,6 +346,13 @@ public class SettingsActivity extends Activity {
                     .setPositiveButton("Set", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+
+                            setTimerValues(tempValue, 2);
+                            //save to global variables
+                            globalVariables = getActivity().getSharedPreferences(sharedPreferenceString, MODE_PRIVATE);
+                            SharedPreferences.Editor editor = globalVariables.edit();
+                            editor.putInt(shortBreak, tempValue);
+                            editor.commit();
                             //
                         }
                     })
@@ -355,12 +376,8 @@ public class SettingsActivity extends Activity {
 
         @Override
         public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-            setTimerValues(newVal, 2);
-            //save to global variables
-            globalVariables = getActivity().getSharedPreferences(sharedPreferenceString, MODE_PRIVATE);
-            SharedPreferences.Editor editor = globalVariables.edit();
-            editor.putInt(shortBreak, newVal);
-            editor.commit();
+            tempValue = newVal;
+
         }
     }
 
@@ -368,6 +385,7 @@ public class SettingsActivity extends Activity {
     // dialog for choosing long break
     public static class lBreakPickerDialog extends DialogFragment
             implements NumberPicker.OnValueChangeListener {
+        private int tempValue;
 
 
         @Override
@@ -387,6 +405,12 @@ public class SettingsActivity extends Activity {
                     .setPositiveButton("Set", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            setTimerValues(tempValue, 3);
+                            //save to global variables
+                            globalVariables = getActivity().getSharedPreferences(sharedPreferenceString, MODE_PRIVATE);
+                            SharedPreferences.Editor editor = globalVariables.edit();
+                            editor.putInt(longBreak, tempValue);
+                            editor.commit();
                             //
                         }
                     })
@@ -410,12 +434,7 @@ public class SettingsActivity extends Activity {
 
         @Override
         public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-            setTimerValues(newVal, 3);
-            //save to global variables
-            globalVariables = getActivity().getSharedPreferences(sharedPreferenceString, MODE_PRIVATE);
-            SharedPreferences.Editor editor = globalVariables.edit();
-            editor.putInt(longBreak, newVal);
-            editor.commit();
+            tempValue = newVal;
 
         }
     }

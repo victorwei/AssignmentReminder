@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import java.io.BufferedReader;
@@ -74,6 +75,8 @@ public class MainActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getListView().setBackgroundResource(R.drawable.main_page);
+
         // set adapter
         aAdapter = new AssignmentAdapter(getApplicationContext(), this);
 
@@ -90,18 +93,18 @@ public class MainActivity extends ListActivity {
             return;
         }
 
-        final Button addButton = (Button)findViewById(R.id.AddItemButton);
+        final ImageButton addButton = (ImageButton)findViewById(R.id.AddItemButton);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // start intent to AddAssignmentActivity
-                Intent intent = new Intent(getApplicationContext(),AddAssignmentActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AddAssignmentActivity.class);
                 startActivityForResult(intent, ADD_ASSIGNMENT);
 
             }
         });
 
-        final Button timerButton = (Button)findViewById(R.id.TimerButton);
+        final ImageButton timerButton = (ImageButton)findViewById(R.id.TimerButton);
         timerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,6 +113,17 @@ public class MainActivity extends ListActivity {
                 startActivity(intent);
             }
         });
+
+        final ImageButton settingsButton = (ImageButton)findViewById(R.id.SettingsButton);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // dialog to choose due date;
+                Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         setListAdapter(aAdapter);
 

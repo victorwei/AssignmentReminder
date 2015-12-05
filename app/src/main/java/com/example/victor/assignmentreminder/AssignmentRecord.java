@@ -124,17 +124,15 @@ public class AssignmentRecord {
         long date = getRemindDayLong(context);
 
         Calendar calendar = Calendar.getInstance();
-
-
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(System.currentTimeMillis());
-
         long time = calendar.getTimeInMillis();
 
 
         notificationReceiverPendingIntent = PendingIntent.getBroadcast(context, var, notificationReceiverIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, date ,AlarmManager.INTERVAL_DAY,
                 notificationReceiverPendingIntent);
+
 //        alarmManager.setExact(AlarmManager.RTC_WAKEUP, date, notificationReceiverPendingIntent);
 
     }
@@ -142,7 +140,7 @@ public class AssignmentRecord {
     public void cancelNotification ()
     {
         //notificationReceiverPendingIntent.cancel();
-        alarmManager.cancel(notificationReceiverPendingIntent);
+        //alarmManager.cancel(notificationReceiverPendingIntent);
     }
 
 

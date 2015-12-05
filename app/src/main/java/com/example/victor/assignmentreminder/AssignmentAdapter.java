@@ -111,7 +111,7 @@ public class AssignmentAdapter extends BaseAdapter{
                                         deleteItem(assignmentRecord);
                                     } else {
                                         deleteItem(assignmentRecord);
-                                        //assignmentRecord.cancelNotification();
+                                        assignmentRecord.cancelNotification();
                                     }
 
                                 }

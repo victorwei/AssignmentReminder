@@ -3,7 +3,7 @@
     android:id="@+id/timerActivity"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/timer_size"
+    android:background="@drawable/timer_go"
 
     tools:context=".TimerActivity">
 
@@ -16,14 +16,6 @@
         android:layout_alignParentTop="true"
         android:text="test"/>
 
-    <!--
-    <View android:id="@+id/backgroundCircle"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_width= "300dp"
-        android:layout_height="300dp"
-        android:background="@drawable/circle" />
--->
 
     <TextView
         android:id="@+id/textViewTimer"
@@ -32,8 +24,9 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text = "00:00"
-        android:layout_marginTop="220dp"
-        android:textSize="36dp"/>
+        android:layout_marginTop="250dp"
+        android:textColor="@color/white"
+        android:textSize="40dp"/>
 
     <Button
         android:id="@+id/btnStart"
@@ -42,9 +35,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="55dp"
-
+        android:textColor="@color/white"
         android:layout_centerVertical="true"
-
         android:text="Start"
         style="?android:attr/borderlessButtonStyle" />
 
@@ -68,27 +60,40 @@
         android:layout_marginRight="67dp"
         android:text="Stop"
         style="?android:attr/borderlessButtonStyle"/>
-        -->
 
     <Button
-        android:id="@+id/btnBack"
+        android:id="@+id/btnBack_OLD"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Finish"
         style="?android:attr/borderlessButtonStyle"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+-->
 
 
 
     <TextView
         android:id="@+id/textDialog"
-        android:layout_below="@+id/btnStop"
+        android:layout_below="@+id/btnStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="17dp"
         android:text = ""
         android:textSize="18sp"/>
+
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="right"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/backarrow"
+        android:background="@android:color/transparent"
+        />
 
 </RelativeLayout>

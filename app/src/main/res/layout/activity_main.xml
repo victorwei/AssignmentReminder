@@ -8,6 +8,57 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".MainActivity"
+    >
+
+    <ImageButton
+        android:id="@+id/AddItemButton"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="120dp"
+        android:layout_width="wrap_content"
+        android:layout_gravity="right"
+        android:src="@drawable/add_button"
+        android:background="@android:color/transparent"
+        />
+
+    <ImageButton
+        android:id="@+id/TimerButton"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/timer_button"
+        android:background="@android:color/transparent"
+        />
+
+    <ImageButton
+        android:id="@+id/SettingsButton"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/settings_button"
+        android:background="@android:color/transparent"
+        />
+
+
+
+
+
+
+</LinearLayout>
+
+
+<!--
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/headerview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity"
     style="?android:buttonBarStyle">
 
     <Button
@@ -35,3 +86,4 @@
 
 
 </LinearLayout>
+-->
